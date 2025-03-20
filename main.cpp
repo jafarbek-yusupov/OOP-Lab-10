@@ -1,6 +1,9 @@
 #include <iostream>
 #include <vector>
 #include <string>
+#include <list>
+#include <numeric>
+#include <algorithm>
 #define str string
 using namespace std;
 
@@ -18,11 +21,29 @@ void task2() {
     for(const str& i : v){ cout << i << " ";} cout << '\n';
 }
 
+void task3() {
+    list<double> lst;
+    int n; cin >> n;
+    list<double> tmpl(n);
+    for(auto& i : tmpl) { cin >> i;}
+    lst.assign(tmpl.begin(), tmpl.end());
+    cout << "List: "; for(const auto& i : lst){ cout << i << " ";} cout << "\n";
+    cout << "Reversed: "; for(auto it = lst.rbegin(); it != lst.rend(); it++){ cout << *it << " ";} cout << "\n";
+
+    double sum = accumulate(lst.begin(), lst.end(), 0.0); double avg = sum / lst.size();
+    cout << "Average=" << avg << "\n"; lst.remove_if([avg](double i) { return i < avg; });
+    cout << "After removing: ";
+    for(const auto& i : lst){ cout << i << " ";} cout << "\n";
+    lst.sort(); cout << "Sorted: ";
+    for(const auto& i : lst){ cout << i << " ";} cout << "\n";
+}
+
 int main(){
     // task1();
-    task2();
+    // task2();
+    task3();
     return 0;
 }
 
-// // com.zuludesk.scripting
+// com.zuludesk.scripting
 // 1077285.mdm.jamfschool.com
